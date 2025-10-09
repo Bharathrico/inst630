@@ -1,0 +1,122 @@
+//Can you hear the music?
+let cpm=0.5//var 1
+setcpm(cpm)
+let pass1="b3 c4 d4 gb4 g4 e4 c4 d4 e4 g4 b4 gb4 d4 e4 gb4 b4 c5 g4 e4 gb4 g4 c5 d5 b4 gb4 g4 b4 d5 e5 c5 b4 c5 d5 gb5 g5 e5 c5 d5 e5 g5 b5 gb5 d5 e5 gb5 b5 c6 g5 d6 c6 b5 gb5 e5 g5 c6 b5 g5 e5 d5 gb5 b5 g5 gb5 d5 c5 e5 g5 gb5 e5 c5 b4 d5 gb5 e5 d5 b4 g4 c5 e5 d5 c5 b4 gb4 b4 d5 c5 b4 gb4 e4 g4 c5 b4 g4 e4 d4 c4"
+let pass1_ascent="b3 c4 d4 gb4 g4 e4 c4 d4 e4 g4 b4 gb4 d4 e4 gb4 b4 c5 g4 e4 gb4 g4 c5 d5 b4 gb4 g4 b4 d5 e5 c5 b4 c5 d5 gb5 g5 e5 c5 d5 e5 g5 b5 gb5 d5 e5 gb5 b5 c6 g5 d6"
+let pass1_descent="c6 b5 gb5 e5 g5 c6 b5 g5 e5 d5 gb5 b5 g5 gb5 d5 c5 e5 g5 gb5 e5 c5 b4 d5 gb5 e5 d5 b4 g4 c5 e5 d5 c5 b4 gb4 b4 d5 c5 b4 gb4 e4 g4 c5 b4 g4 e4 d4 c4"
+let tunearray1=[]
+//test
+for(let i=0;i<10;i++)
+  {
+    if(i==0)
+    {
+        tunearray1.push([156,pass1])
+    }
+    if(i==1)
+    {
+      tunearray1.push([140,pass1])  
+    }
+    if(i==2)
+    {
+      tunearray1.push([120,pass1])  
+    }
+    if(i==3)
+    {
+      tunearray1.push([60,pass1_ascent])  
+      tunearray1.push([50,pass1_descent])
+    }
+    if(i>3&&i<8)
+    {
+      tunearray1.push([80,pass1])  
+    }
+    if(i==8)
+    {
+      tunearray1.push([40,pass1_ascent])  
+      tunearray1.push([36,"[g5 b5 e5]!18"])
+      tunearray1.push([24,"[a5 d6 d5]!12"]) 
+      tunearray1.push([40,"[d5 b5 d6]!24 [b5 d6]"]) 
+    }
+    if(i==9)
+    {
+        tunearray1.push([80,"<~>"])
+      }
+  }
+let tune = stepcat(
+  ...tunearray1
+  // [80,pass1]
+  )
+  .note()
+  .sound("piano").scope()
+
+//var2
+
+// let tune2 = stepcat(
+//   [156,"<~>"],
+//   [140,"~ ~ ~ [c1,c2]@6 ~ ~ ~ ~ ~ [c1,c2]@6 ~ ~ ~ ~ ~ ~"],
+//   [120,"[a2@0.3,e3@0.3,a3@0.3]!16 [e1@0.5,e2@0.5] [e3@0.3,g3@0.3,b3@0.3]!8 [f#3,f#4]@2 [e3@0.3,g3@0.3,b3@0.3]!8"],
+//   [120,"[a2,a3] e3@3 [d3@0.3,a3@0.3,c4@0.3]!5 [c1@0.5,c2@0.5] [g3@0.3,a3@0.3,e4@0.3]!7 [f#3,f#4] [e1@0.5,e2@0.5] [e3@0.3,g3@0.3,b3@0.3]!3 [e3@0.5,e4@0.5] [e3@0.3,g3@0.3,b3@0.3]!10"],
+//   [80,"[f#3 f#4] [c4 f#4 a4]"],
+//   [80,"<~>"],
+//   [80,"<~>"],
+//   [80,"<~>"],
+//   [80,"<~>"],
+//   [80,"<~>"],
+
+// )
+//   .note()
+//   .sound("piano")
+//   // .gain(0.7)
+//   .lpf("700")
+//   .room("0.4")
+//   .roomsize("0.9")
+
+let tune2 = stepcat(
+  [156,"<~>"],
+  [140,"~ [c1,c2] ~ ~ [e1,e2] ~ ~ ~"],
+  [120,"[a2,a3]!8 [e2,e3] [b2,g3]!7"],
+  [60,"[a2,c3,e3]!8 [c3,e3,g3]!8"],
+  [50,"[e3,b3]!16 "],
+  [80,"[f#2,f#3] [f#3,a3]!23 [c3,g3] [e3,g3]!5 [c3,g3] [e3,g3]!5 [c3,g3] [e3,g3]!5 [c3,g3] [e3,g3]!5"],
+  [80,"[d2,d3] [d3]!5 [d2,d3] [d3]!5 [d2,d3] [d3]!5 [d2,d3] [d3]!5 [c2,c3] [c3]!5 [c2,c3] [c3]!5 [c2,c3] [c3]!5 [c2,c3] [c3]!5 "],
+  [80,"[d2,d3] [d3]!5 [d2,d3] [d3]!5 [d2,d3] [d3]!5 [d2,d3] [d3]!5 [e2,e3] [e3]!5 [e2,e3] [e3]!5 [e2,e3] [e3]!5 [e2,e3] [e3]!5"],
+  [80,"[F#2,F#3] [F#3]!5 [F#2,F#3] [F#3]!5 [F#2,F#3] [F#3]!5 [F#2,F#3] [F#3]!5 [c2,c3] [c3]!5 [c2,c3] [c3]!5 [c2,c3] [c3]!5 [c2,c3] [c3]!5"],
+  [40,"[d2,d3] [d3]!5 [d2,d3] [d3]!5 [d2,d3] [d3]!5 [d2,d3] [d3]!5"],
+  [36,"[e1,e2]!6"],
+  [24,"[F#1,F#2]!6"],
+  [40,"[G1,G2]!8"],
+  [80,"<~>"],
+
+)
+  .note()
+  .sound("piano")
+  // .gain(0.7)
+  .lpf("400")
+  .room("0.4")
+  .roomsize("0.9")
+
+let tune3 = stepcat(
+  [156,"<~>"],
+  [140,"~ [c1,c2] ~ ~ [e1,e2] ~ ~ ~"],
+  [120,"[~]!8 [e2,e3] [~]!7"],
+  [60,"[~]16"],
+  [50,"[~]16"],
+  [80,"[f#2,f#3] [~]!23 [~] [~]!5 [~] [~]!5 [~] [~]!5 [~] [~]!5"],
+  [80,"<~>"],
+  [80,"<~>"],
+  [80,"<~>"],
+  [40,"<~>"],
+  [36,"<~>"],
+  [24,"<~>"],
+  [40,"<~>"],
+  [80,"<~>"],
+
+)
+  .note()
+  .sound("piano")
+  .gain(1.4)
+  .hpf("700")
+  // .room("0.4")
+$: stack(tune,
+         tune2, 
+         tune3
+        )._punchcard()
