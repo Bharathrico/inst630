@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* this is the codeee */
+
+body
+{
+  display:flex;
+  align-items:center;
+  justify-content: space-evenly;
+  height:100vh;
+  background: #efefef;
+  gap: 20px;
+  padding: 20px;
+}
+
+.component-complex
+{
+  width: 471px;
+  background:white;
+  border-radius:10px;
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  flex-direction: column;
+  /* box-shadow: 0 10px 60px 0 #00000044; */
+}
+
+.main-content
+{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap:24px;
+    width: 100%;
+    .description
+    {
+    width:100%;
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 16px;
+        .text
+        {
+            font-size: 14px;
+            font-family: "Roboto Mono", monospace;
+            font-weight: 400;
+        }
+    }
+}
+
+
+
+
+.header
+{
+    display: flex;
+    align-items:start;
+    justify-content: space-between;
+    flex-direction: row;
+    font-size: 12px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 300;
+
+    .title-date
+    {
+        display: flex;
+        align-items: left;
+        justify-content: space-between;
+        flex-direction: column;
+    
+        .title
+        {
+            font-size: 24px;
+            font-family: "Libre Baskerville", serif;
+            font-weight: 700;
+        }
+        .date
+        {
+            font-size: 12px;
+            font-family: "Roboto Mono", monospace;
+            font-weight: 300;
+        }
+    }
+
+    .author
+    {
+        width: auto;
+        font-size: 12px;
+        font-family: "Roboto Mono", monospace;
+        font-weight: 300;
+        display: flex;
+        flex-direction: row;
+        flex-wrap:unset;
+        gap: 8px;
+        padding: 8px;
+        img
+        {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+}
+
+.engagement-bar
+{
+    width:100%;  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-size: 12px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 300;
+}
+
+.engagement-metric
+{
+    display: flex;
+    flex-direction: row;
+    gap:12px;
+}
+
+.comment-section
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.comment
+{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap:16px;
+    border-top: 1px solid hsla(0, 0%, 93%, 1);
+    .author
+    {
+        padding: 0;
+    }
+}
+
+.text
+{
+    font-size: 14px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 400;
+}
+
+@media (width<1200px)
+{
+    body
+    {
+        flex-direction: column;
+        height: max-content;
+    }
+}
+
+@media (width<480px)
+{
+  .component-complex
+  {
+    width: 350px;
+
+  }
+  
+  .main-content
+  {
+    .description
+    {
+    .text
+    {
+      font-size: 12px;
+    }
+    }
+  }
+
+  .header
+  {
+    font-size: 10px ;
+    .title-date
+    {
+      .title
+     {
+        font-size: 16px;
+     }
+    }
+    .author
+    {
+        font-size: 10px;
+        gap: 4px;
+        padding: 4px;
+        img
+        {
+            width: 10px;
+            height: 10px;
+        }
+    }
+    
+  }
+
+  .desktop-text
+  {
+    display: none;
+    visibility: none;
+  }
+
+  .engagement-bar
+  {
+    font-size: 14px;
+  }
+
+  .engagement-metric
+  {
+    height: auto;
+    align-items: center;
+  }
+
+  .icons
+  {
+    width: 14px;
+    height: 14px;
+  }
+
+  .author
+  {
+    align-items: center;
+  }
+
+  .comment
+  {
+    padding: 8px;
+    gap: 8px;
+  }
+}
