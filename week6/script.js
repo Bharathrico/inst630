@@ -76,9 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             setTimeout(()=>{
                 loadButton.disabled=false
-                displayButton.disabled=false
-                filterButton.disabled=false
-                mapButton.disabled=false
+                toggleMethodButtons(true)
                 statusDisplay.classList.remove('loading')
                 statusDisplay.className+=' success'
                 statusMessage.textContent='Data loaded'
