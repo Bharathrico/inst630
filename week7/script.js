@@ -40,11 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hint: await fetch('restaurants.geojson') - note the .geojson extension
             // Hint: GeoJSON loads exactly like regular JSON
             
+            const response = await fetch('restaurants.geojson');
+
             // Step 3: Extract restaurant features from GeoJSON
             // Hint: const restaurantData = await response.json();
             // Hint: restaurants = restaurantData.features; (GeoJSON has a 'features' array)
             
             // YOUR CODE HERE:
+            
+            if(response.ok)
+            {
+                const data = await response.json();
             
             
             // Step 4: Show success and enable interface
@@ -52,12 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hint: Call showDataSummary() and showInitialView()
             
             // YOUR CODE HERE:
-            
+                 restaurants=data
+                console.log(restaurants)
+            }
             
         } catch (error) {
             // Step 5: Handle loading errors
             // YOUR CODE HERE:
-            
+            throw new Error(`HTTP error! status: ${response.status}`);
             
         }
     });
