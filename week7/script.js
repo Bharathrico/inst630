@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get UI elements
     const loadButton = document.querySelector('#load-data-button');
     const statusDisplay = document.querySelector('#loading-status');
+    const statusMessage = statusDisplay.querySelector('.status-message');
     const dataSummary = document.querySelector('#data-summary');
     const viewControls = document.querySelector('#view-controls');
     const displayContainer = document.querySelector('#display-container');
@@ -34,6 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // YOUR CODE HERE:
         
+         if(statusDisplay.classList.contains('success'))
+        {
+            statusDisplay.classList.remove('success')
+        }
+        loadButton.disabled=true
+        statusDisplay.className+=' loading'
+        statusMessage.textContent='loading JSON data'
         
         try {
             // Step 2: Load the GeoJSON data
@@ -58,14 +66,38 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hint: Call showDataSummary() and showInitialView()
             
             // YOUR CODE HERE:
-                 restaurants=data
+                 restaurants=data.features
                 console.log(restaurants)
+           setTimeout(()=>{
+                loadButton.disabled=false
+                showInitialView()
+                showDataSummary()
+                statusDisplay.classList.remove('loading')
+                statusDisplay.className+=' success'
+                statusMessage.textContent='Data loaded'
+            },2000)
+            
+
+            }
+            else
+            {
+                
+                throw new Error(`HTTP error! status: ${response.status}`);
+                
             }
             
-        } catch (error) {
+        } 
+            
+        catch (error) {
             // Step 5: Handle loading errors
             // YOUR CODE HERE:
-            throw new Error(`HTTP error! status: ${response.status}`);
+            setTimeout(()=>{
+            loadButton.disabled=false
+            statusDisplay.classList.remove('loading')
+            statusDisplay.className+=' error'
+            statusMessage.textContent='Failed to load data'
+            console.error('Demonstrated error:', error);
+            }, 2000)
             
         }
     });
@@ -80,7 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hint: Call switchToView('card') and updateViewButtons
         
         // YOUR CODE HERE:
-        
+        updateViewButtons(cardViewBtn);
+        switchToView('card')
         
     });
     
@@ -88,16 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
     tableViewBtn.addEventListener('click', function() {
         // Step 7: Switch to table view
         // YOUR CODE HERE:
-        
-        
+        updateViewButtons(tableViewBtn);        
+        switchToView('table')
     });
     
     // Stats view button
     statsViewBtn.addEventListener('click', function() {
         // Step 8: Switch to stats view
         // YOUR CODE HERE:
-        
-        
+        updateViewButtons(statsViewBtn);
+        switchToView('stats')
     });
     
     // ============================================
@@ -115,6 +148,39 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // YOUR CODE HERE:
         
+        restaurants.forEach((restaurant)=>{
+            let restaurantCard = document.createElement('div')
+            restaurantCard.className=`restaurant-card ${
+                getComplianceStatus(restaurant)=='compliant'?'compliant':'non-compliant'
+            }`
+            let restaurantName = document.createElement('div')
+            restaurantName.className='card-name'
+            restaurantName.innerText = restaurant.properties.name
+            restaurantCard.appendChild(restaurantName)
+            
+            let cardLocation = document.createElement('a')
+            cardLocation.className='card-location'
+            cardLocation.style = 'text-decoration: none;'
+            if(restaurant.geometry&&restaurant.geometry.coordinates)
+            {
+            cardLocation.href = `https://www.google.com/maps?q=${restaurant.geometry.coordinates.join(',')}`
+            }
+            cardLocation.target = '_blank'
+            cardLocation.innerText = restaurant.properties.city
+            restaurantCard.appendChild(cardLocation)
+            
+            let cardStatus = document.createElement('div')
+            cardStatus.className=`card-status ${getComplianceStatus(restaurant)}`
+            cardStatus.innerText = getComplianceStatus(restaurant)
+            restaurantCard.appendChild(cardStatus)
+            
+            let cardDate = document.createElement('div')
+            cardDate.className=`card-date`
+            cardDate.innerText = formatDate(restaurant.properties.inspection_date)
+            restaurantCard.appendChild(cardDate)
+
+            cardGrid.appendChild(restaurantCard)
+        })
         
         console.log('Card view: Emphasizing restaurant discovery');
     }
@@ -133,8 +199,41 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hint: Include specific compliance fields for comparison
         
         // YOUR CODE HERE:
-        
-        
+        const restaurants = slicedArray(0,9)
+        console.log(restaurants)
+        restaurants.forEach((restaurant)=>{
+            let tableRow = document.createElement('tr')
+            
+            let restaurantName = document.createElement('td')
+            restaurantName.className = 'table-restaurant-name'
+            restaurantName.innerText = restaurant.properties.name
+            tableRow.appendChild(restaurantName)
+
+            let city = document.createElement('td')
+            city.innerText = restaurant.properties.city
+            tableRow.appendChild(city)
+
+            let date = document.createElement('td')
+            date.innerText = formatDate(restaurant.properties.inspection_date)
+            tableRow.appendChild(date)
+
+            let tableStatus = document.createElement('td')
+            tableStatus.className = `table-status ${getComplianceStatus(restaurant)}`
+            tableStatus.innerText = restaurant.properties.inspection_results
+            tableRow.appendChild(tableStatus)
+            
+            let washing = document.createElement('td')
+            washing.className = `compliance-indicator ` + getHandWashingCompliance(restaurant)[0]
+            washing.innerText = getHandWashingCompliance(restaurant)[1]
+            tableRow.appendChild(washing)
+
+            let foodTemp = document.createElement('td')
+            foodTemp.className = `compliance-indicator ` + getTempCompliance(restaurant)[0]
+            foodTemp.innerText = getTempCompliance(restaurant)[1]
+            tableRow.appendChild(foodTemp)
+
+            tableBody.appendChild(tableRow)
+        })
         console.log('Table view: Emphasizing safety record comparison');
     }
     
@@ -164,8 +263,24 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hint: Count total restaurants, compliance rate, unique cities
         
         // YOUR CODE HERE:
-        
-        
+        const restaurantCount = restaurants.length;
+        const citiesSet = new Set(restaurants.map(
+            (restaurant)=>restaurant.properties.city)
+        )
+        let compliance = 0;
+        restaurants.forEach((restaurant)=>{
+            if(getComplianceStatus(restaurant)=="compliant")
+            {
+                compliance+=1
+            }
+        })
+        compliance = Math.floor((compliance/restaurantCount) * 100)
+        const recordCount = document.querySelector("#record-count")
+        const complianceRate = document.querySelector("#compliance-rate")
+        const cityCount = document.querySelector("#city-count")
+        recordCount.innerHTML = `${restaurantCount}`
+        cityCount.innerHTML = `${citiesSet.size}`
+        complianceRate.innerHTML = `${compliance} %`
         dataSummary.classList.remove('hidden');
     }
     
@@ -229,6 +344,58 @@ document.addEventListener('DOMContentLoaded', function() {
     function getComplianceIndicator(value) {
         if (!value || value === '------') return 'N/A';
         return value === 'In Compliance' ? '✓' : '✗';
+    }
+
+    // Helper: get a sliced array
+    function slicedArray(first, last)
+    {
+        return restaurants.slice(first, last)
+    }
+
+    // Helper: handwashing check
+    function getHandWashingCompliance(restaurant)
+    {
+        if(getComplianceIndicator(restaurant.properties.proper_hand_washing)!='N/A'
+        &&getComplianceIndicator(restaurant.properties.adequate_hand_washing)!='N/A')
+        {
+            if(getComplianceIndicator(restaurant.properties.proper_hand_washing)=='✓'
+        &&getComplianceIndicator(restaurant.properties.adequate_hand_washing)=='✓')
+            {
+                return ['pass','✓']
+            }
+            else
+            {
+                return ['fail','✗']
+            }
+        }
+
+        else
+        {
+            return ['','N/A']
+        }
+    }
+
+    // Helper: handwashing check
+    function getTempCompliance(restaurant)
+    {
+        if(getComplianceIndicator(restaurant.properties.cold_holding_temperature)!='N/A'
+        &&getComplianceIndicator(restaurant.properties.hot_holding_temperature)!='N/A')
+        {
+            if(getComplianceIndicator(restaurant.properties.cold_holding_temperature)=='✓'
+        &&getComplianceIndicator(restaurant.properties.hot_holding_temperature)=='✓')
+            {
+                return ['pass','✓']
+            }
+            else
+            {
+                return ['fail','✗']
+            }
+        }
+
+        else
+        {
+            return ['','N/A']
+        }
     }
     
 });
