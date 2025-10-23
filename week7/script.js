@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 statusDisplay.classList.remove('loading')
                 statusDisplay.className+=' success'
                 statusMessage.textContent='Data loaded'
-            },0)
+            },2000)
             
 
             }
