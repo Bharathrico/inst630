@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 statusDisplay.classList.remove('loading')
                 statusDisplay.className+=' success'
                 statusMessage.textContent='Data loaded'
-            },2000)
+            },0)
             
 
             }
@@ -248,9 +248,93 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hint: Group by city and calculate city-level stats
         
         // YOUR CODE HERE:
+        const cityStats = document.querySelector('#city-stats');
+        cityStats.innerHTML = '';
+
+        const statsGrid = document.querySelector('#stats-grid');
+        statsGrid.innerHTML = '';
+
+        let cityCompliances = {}
+
+        restaurants.forEach((restaurant)=>{
+            let cityname = restaurant.properties.city.toLowerCase()
+            if(cityCompliances[cityname])
+            {
+            cityCompliances[cityname] = { 
+                restaurantCount : cityCompliances[cityname].restaurantCount+1,
+                compliance : getComplianceStatus(restaurant)=="compliant"? 
+                                cityCompliances[cityname].compliance+1 : cityCompliances[cityname].compliance,
+                nonCompliance : getComplianceStatus(restaurant)=="non-compliant"? 
+                                cityCompliances[cityname].nonCompliance+1 : cityCompliances[cityname].nonCompliance,                
+                percentage : Math.floor(compliancePercentage(cityCompliances[cityname].compliance,cityCompliances[cityname].restaurantCount))
+            }
+            }
+            else
+            {
+                cityCompliances[cityname] = { 
+                restaurantCount : 1,
+                compliance :  getComplianceStatus(restaurant)=="compliant"? 1 : 0,
+                nonCompliance:  getComplianceStatus(restaurant)=="non-compliant"? 1 : 0,
+                percentage: getComplianceStatus(restaurant)=="compliant"? 100 : 0
+             }
+            }
+        })
+
+        let cityList = Object.entries(cityCompliances).sort(([,a],[,b]) => b.percentage - a.percentage  )
+
+        cityList.forEach((city)=>{
+
+            let cityStat = document.createElement('div')
+            cityStat.className = 'city-stat' 
+
+            let cityName = document.createElement("div")
+            cityName.className = 'city-name'
+            cityName.style = "text-transform: capitalize;"
+            cityName.innerText= city[0]
+            cityStat.appendChild(cityName)
+
+            let cityCompliance = document.createElement("div")
+            cityCompliance.className = 'city-compliance'
+            cityCompliance.innerText = `${city[1].compliance}/${city[1].restaurantCount}`
+            cityStat.appendChild(cityCompliance)
+
+            cityStats.appendChild(cityStat)
+        })
         
-        
+        cityList.sort(([,a],[,b])=> b.restaurantCount - a.restaurantCount)
+
+        let nonComplianceTotal = 0
+        cityList.forEach((city)=>{
+            nonComplianceTotal+=city[1].nonCompliance
+        })
+
+        statsGrid.appendChild(createStatDiv("City with most restaurants: " + cityList[0][0],cityList[0][1].restaurantCount))
+        statsGrid.appendChild(createStatDiv("Number of non-compliant restaurants: ", nonComplianceTotal))
+
+        cityList.sort(([,a],[,b])=> b.nonCompliance - a.nonCompliance)
+
+        statsGrid.appendChild(createStatDiv("City with most non-compliant restaurants: " + cityList[0][0] , cityList[0][1].nonCompliance))
+
         console.log('Stats view: Emphasizing county-wide patterns');
+    }
+
+    //helper function
+    function createStatDiv(labeltext, statData)
+    {
+        let statCard = document.createElement('div')
+        statCard.className='stat-card'
+
+        let statLabel = document.createElement('div')
+        statLabel.className = 'stat-label'
+        statLabel.textContent = labeltext
+        statCard.appendChild(statLabel)
+
+        let statNumber = document.createElement('div')
+        statNumber.className = 'stat-number'
+        statNumber.textContent = statData
+        statCard.appendChild(statNumber)
+
+        return statCard
     }
     
     // ============================================
@@ -265,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // YOUR CODE HERE:
         const restaurantCount = restaurants.length;
         const citiesSet = new Set(restaurants.map(
-            (restaurant)=>restaurant.properties.city)
+            (restaurant)=>restaurant.properties.city.toLowerCase())
         )
         let compliance = 0;
         restaurants.forEach((restaurant)=>{
@@ -350,6 +434,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function slicedArray(first, last)
     {
         return restaurants.slice(first, last)
+    }
+
+    // Helper: get a sliced array
+    function compliancePercentage(numerator, denominator)
+    {
+        return (numerator/denominator) *100
     }
 
     // Helper: handwashing check
