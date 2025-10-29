@@ -10,15 +10,8 @@ function showCards(data) {
       (restaurant) => `
                 <div class="restaurant-card">
                     <h3>${restaurant.name}</h3>
-                    <p><strong>Cuisine:</strong> ${restaurant.cuisine}</p>
-                    <p><strong>Rating:</strong> ${
-                      restaurant.rating
-                    }⭐ | <strong>Price:</strong> ${restaurant.priceRange}</p>
-                    <p><strong>Location:</strong> ${restaurant.neighborhood}</p>
-                    <p><strong>Phone:</strong> ${restaurant.phoneNumber}</p>
-                    <p><strong>Specialties:</strong> ${restaurant.specialties.join(
-                      ", "
-                    )}</p>
+                    <p><strong>Category:</strong> ${restaurant.category}</p>
+                    <p><strong>Location:</strong> ${restaurant.city}</p>
                 </div>
             `
     )

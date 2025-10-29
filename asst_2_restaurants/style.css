@@ -7,6 +7,7 @@
     --text-color: #333;
     --border-color: #ddd;
     --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --spacing-md: 1rem;
 }
 
 body {
@@ -200,4 +201,76 @@ body {
     padding: 1rem;
     background: white;
     border-radius: 8px;
+}
+
+/* TABLE VIEW */
+.table-container {
+    overflow-x: auto;
+}
+
+.inspection-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.inspection-table th {
+    background: #f8f9fa;
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 2px solid var(--border-color);
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.inspection-table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.inspection-table tr:hover {
+    background: #f8f9fa;
+}
+
+.table-restaurant-name {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.table-status {
+    padding: 0.25rem var(--spacing-sm);
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.table-status.compliant {
+    background: #d4edda;
+    color: #155724;
+}
+
+.table-status.non-compliant {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.table-status.other {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.compliance-indicator {
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.compliance-indicator.pass {
+    color: var(--secondary-color);
+}
+
+.compliance-indicator.fail {
+    color: var(--error-color);
 }

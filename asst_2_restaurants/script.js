@@ -94,4 +94,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Application failed to start:", error);
     showError(error.message);
   }
+
+
+
 });
+
+
+
