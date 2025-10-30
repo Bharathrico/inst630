@@ -15,8 +15,24 @@ async function loadData() {
     const response = await fetch ("./data.json")
     const data = await response.json();
     console.log("data loaded", data);
-
-    return data;
+    console.log(data.length)
+    if(response.ok)
+    {
+      let newArray = []
+      data.reduce((acc,current)=>{ 
+        let currentEstablishment = acc.find((res) => current.establishment_id == res.establishment_id)
+      if(currentEstablishment==undefined)
+      {
+        acc.push(current)
+        return acc
+      }
+      else
+      {
+      return acc
+      }
+    }, newArray, )
+      return newArray
+    }
     
     // Simulate API delay
     // await new Promise((resolve) => setTimeout(resolve, 1000));

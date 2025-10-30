@@ -33,6 +33,15 @@ function showLoading() {
   updateDisplay('<div class="loading">Loading data from API...</div>');
 }
 
+
+//function to insert eventlisteners for category view
+function categoryListeners()
+{
+  document.querySelector('#sample').onclick = ()=>{
+    console.log("yess, hell yeaah")
+  }
+}
+
 /**
  * Show error state
  */
@@ -75,8 +84,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       updateButtonStates("table");
     };
 
-    document.getElementById("btn-categories").onclick = () => {
-      updateDisplay(showCategories(data));
+    document.getElementById("btn-categories").onclick = async () => {
+      await updateDisplay(showCategories(data));
+      await categoryListeners()
       updateButtonStates("categories");
     };
 
@@ -84,10 +94,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       updateDisplay(showStats(data));
       updateButtonStates("stats");
     };
+    
 
     // Show initial view
     updateDisplay(showCards(data));
     updateButtonStates("cards");
+
+   
 
     console.log("Application ready!");
   } catch (error) {

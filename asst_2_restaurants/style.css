@@ -6,8 +6,13 @@
     --card-background: #ffffff;
     --text-color: #333;
     --border-color: #ddd;
+    --border-radius: 0.5rem;
     --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
 }
 
 body {
@@ -77,8 +82,6 @@ body {
 .view-title {
     margin: 0 0 1rem 0;
     color: var(--text-color);
-    border-bottom: 2px solid #eee;
-    padding-bottom: 0.5rem;
 }
 
 .view-description {
@@ -161,46 +164,69 @@ body {
     border-bottom: none;
 }
 
-/* STATS LAYOUT */
+/* STATS VIEW */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 }
 
 .stat-card {
-    text-align: center;
-    padding: 2rem;
     background: linear-gradient(135deg, var(--primary-color), #0056b3);
     color: white;
-    border-radius: 8px;
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius);
+    text-align: center;
 }
 
 .stat-number {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    margin: 0.5rem 0;
+    margin: var(--spacing-sm) 0;
+    line-height: 1;
 }
 
 .stat-label {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     opacity: 0.9;
+    margin: 0;
 }
 
-.todo-implementation {
-    background: #fff3cd;
-    border: 2px dashed #ffc107;
-    border-radius: 8px;
-    padding: 2rem;
-    text-align: center;
-    color: #856404;
+.city-breakdown {
+    background: #f8f9fa;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
 }
 
-.asst-box {
-    margin-top: 2rem;
-    padding: 1rem;
+.city-breakdown h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: var(--spacing-lg);
+}
+
+.city-stats {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.city-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
     background: white;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
+    border-left: 0.25rem solid var(--info-color);
+}
+
+.city-name {
+    font-weight: bold;
+}
+
+.city-compliance {
+    font-size: 0.875rem;
+    color: var(--text-muted);
 }
 
 /* TABLE VIEW */

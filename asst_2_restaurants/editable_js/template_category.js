@@ -2,6 +2,8 @@
  * CATEGORY VIEW - STUDENTS IMPLEMENT
  * Group data by categories - good for understanding relationships and patterns
  */
+
+
 function showCategories(data) {
   // TODO: Students implement this function
   // Requirements:
@@ -9,19 +11,47 @@ function showCategories(data) {
   // - Show items within each group
   // - Make relationships between groups clear
   // - Consider showing group statistics
+  let categories={}
+  data.reduce((acc,current)=>{
+   let category = current.category.toLowerCase().replace('@','').replace('-',' ').replace('chain','').trimEnd()
+   if(acc[category])
+   {
+    acc[category] += 1
+    return acc
+   }
+   else
+   {
+    acc[category] =1
+    return acc
+   }
+  },categories)
+  categories = Object.entries(categories).sort((([,a],[,b])=> b-a)).slice(0,4)
+  console.log(categories)
   /*html*/
-  return `
+  let categoryView =``
+  categoryView+= `
                 <h2 class="view-title">📂 Category View</h2>
-                <div class="todo-implementation">
-                    <h3>TODO: Implement Category View</h3>
-                    <p><strong>Your task:</strong> Group the data by categories to show relationships</p>
-                    <p><strong>Good for:</strong> Understanding patterns, finding similar items, exploring by type</p>
-                    <p><strong>Consider:</strong> Group by cuisine? Neighborhood? Price range? What tells the best story?</p>
-                    <p><strong>Available categories:</strong> ${[
-                      ...new Set(data.map((item) => item.cuisine)),
-                    ].join(", ")}</p>
-                </div>
+                <button id='sample'>Sample</button>
             `;
+  
+
+  // if(document.querySelector('#sample'))
+  // {
+  //     document.querySelector('#sample').addEventListener('click')=()=>{
+  //           console.log("summaaa")
+  // }
+  // }
+
+    return categoryView
 }
+
+
+          
+
+
+
+
+
+
 
 export default showCategories;

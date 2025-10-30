@@ -50,19 +50,19 @@ function showTableView(tableContent,data) {
             tableContent+=`<td>${formatDate(restaurant.inspection_date)}</td>`
 
             //inspection_results-getComplianceStatus-to be updated
-            // tableContent+=`<td class="table-status ${getComplianceStatus(restaurant)}">${restaurant.inspection_results}</td>`
+            tableContent+=`<td class="table-status ${getComplianceStatus(restaurant)}">${restaurant.inspection_results}</td>`
             
             //getHandwashingCompliance-to be updated
-            // tableContent+=`<td class="compliance-indicator ${getHandWashingCompliance(restaurant)[0]}">${getHandWashingCompliance(restaurant)[1]}</td>`
+            tableContent+=`<td class="compliance-indicator ${getHandWashingCompliance(restaurant)[0]}">${getHandWashingCompliance(restaurant)[1]}</td>`
             
             //getTempCompliance-to be updated
-            // tableContent+=`<td class="compliance-indicator ${getTempCompliance(restaurant)[0]}">${getTempCompliance(restaurant)[1]}</td>`
+            tableContent+=`<td class="compliance-indicator ${getTempCompliance(restaurant)[0]}">${getTempCompliance(restaurant)[1]}</td>`
 
            tableContent+='</tr>'
         })
+        console.log('Table view: Emphasizing safety record comparison');
 
         return tableContent;
-        console.log('Table view: Emphasizing safety record comparison');
     }
     
      function slicedArray(data,first, last)
@@ -76,4 +76,58 @@ function showTableView(tableContent,data) {
         return date.toLocaleDateString();
     }
 
+    // Helper: handwashing check
+    function getHandWashingCompliance(restaurant)
+    {
+        if(getComplianceIndicator(restaurant.proper_hand_washing)!='N/A'
+        &&getComplianceIndicator(restaurant.adequate_hand_washing)!='N/A')
+        {
+            if(getComplianceIndicator(restaurant.proper_hand_washing)=='✓'
+        &&getComplianceIndicator(restaurant.adequate_hand_washing)=='✓')
+            {
+                return ['pass','✓']
+            }
+            else
+            {
+                return ['fail','✗']
+            }
+        }
+
+        else
+        {
+            return ['','N/A']
+        }
+    }
+
+    // Helper: handwashing check
+    function getTempCompliance(restaurant)
+    {
+        if(getComplianceIndicator(restaurant.cold_holding_temperature)!='N/A'
+        &&getComplianceIndicator(restaurant.hot_holding_temperature)!='N/A')
+        {
+            if(getComplianceIndicator(restaurant.cold_holding_temperature)=='✓'
+        &&getComplianceIndicator(restaurant.hot_holding_temperature)=='✓')
+            {
+                return ['pass','✓']
+            }
+            else
+            {
+                return ['fail','✗']
+            }
+        }
+
+        else
+        {
+            return ['','N/A']
+        }
+    }
+     function getComplianceStatus(restaurant) {
+        const result = restaurant.inspection_results;
+        if (!result || result === '------') return 'other';
+        return result.toLowerCase().includes('non-compliant') ? 'non-compliant' : 'compliant';
+    }
+    function getComplianceIndicator(value) {
+    if (!value || value === '------') return 'N/A';
+    return value === 'In Compliance' ? '✓' : '✗';
+}
 export default showTable;
