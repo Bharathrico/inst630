@@ -1,5 +1,5 @@
 import showCards from './editable_js/template_cards.js';
-import showCategories from './editable_js/template_category.js';
+import showCategories,{categoryView} from './editable_js/template_category.js';
 import showStats from './editable_js/template_stats.js';
 import showTable from './editable_js/template_table.js';
 
@@ -37,9 +37,19 @@ function showLoading() {
 //function to insert eventlisteners for category view
 function categoryListeners()
 {
-  document.querySelector('#sample').onclick = ()=>{
-    console.log("yess, hell yeaah")
+  document.querySelector('#cat-1').onclick = (e)=>{
+    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
   }
+  document.querySelector('#cat-2').onclick = (e)=>{
+    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
+  }
+  document.querySelector('#cat-3').onclick = (e)=>{
+    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
+  }
+  document.querySelector('#cat-4').onclick = (e)=>{
+    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
+  }
+  
 }
 
 /**
