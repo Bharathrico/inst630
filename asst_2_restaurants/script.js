@@ -37,6 +37,7 @@ function showLoading() {
 //function to insert eventlisteners for category view
 function categoryListeners()
 {
+  document.querySelector('#category-table tbody').innerHTML =categoryView(document.querySelector('#cat-1').dataset.category) 
   document.querySelector('#cat-1').onclick = (e)=>{
     document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
   }
