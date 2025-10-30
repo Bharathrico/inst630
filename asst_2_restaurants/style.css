@@ -234,13 +234,13 @@ body {
     overflow-x: auto;
 }
 
-.inspection-table {
+.inspection-table,.category-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
 }
 
-.inspection-table th {
+.inspection-table,.category-table th {
     background: #f8f9fa;
     padding: var(--spacing-md);
     text-align: left;
@@ -249,13 +249,13 @@ body {
     color: var(--text-color);
 }
 
-.inspection-table td {
+.inspection-table,.category-table td {
     padding: var(--spacing-md);
     border-bottom: 1px solid #eee;
     vertical-align: top;
 }
 
-.inspection-table tr:hover {
+.inspection-table,.category-table tr:hover {
     background: #f8f9fa;
 }
 
