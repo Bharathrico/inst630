@@ -646,6 +646,11 @@ h1 {
 }
 
 @media (width<600px) {
+
+  .container {
+  width: 80%;
+  }
+
   .city-breakdown {
     padding: var(--spacing-sm);
   }
