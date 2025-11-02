@@ -1,5 +1,5 @@
 import showCards from './editable_js/template_cards.js';
-import showCategories,{categoryView} from './editable_js/template_category.js';
+import showCategories, { categoryView } from './editable_js/template_category_new.js';
 import showStats from './editable_js/template_stats.js';
 import showTable from './editable_js/template_table.js';
 
@@ -34,29 +34,39 @@ function showLoading() {
 }
 
 
+//category-button update
+function updateCategoryButtonStates(activeView) {
+  document.querySelectorAll(".category-button").forEach((button) => {
+    button.classList.remove("category-active");
+  });
+  document.getElementById(`cat-${activeView}`).classList.add("category-active");
+}
+
 //function to insert eventlisteners for category view
-function categoryListeners()
-{
-  document.querySelector('#category-table tbody').innerHTML =categoryView(document.querySelector('#cat-1').dataset.category) 
-  document.querySelector('#cat-1').onclick = (e)=>{
-    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
+function categoryListeners() {
+  document.querySelector('#category-table tbody').innerHTML = categoryView(document.querySelector('#cat-1').dataset.category)
+  document.querySelector('#cat-1').onclick = (e) => {
+    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
+    updateCategoryButtonStates('1')
   }
-  document.querySelector('#cat-2').onclick = (e)=>{
-    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
+  document.querySelector('#cat-2').onclick = (e) => {
+    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
+    updateCategoryButtonStates('2')
   }
-  document.querySelector('#cat-3').onclick = (e)=>{
-    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
+  document.querySelector('#cat-3').onclick = (e) => {
+    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
+    updateCategoryButtonStates('3')
   }
-  document.querySelector('#cat-4').onclick = (e)=>{
-    document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
-  }
-  
+  // document.querySelector('#cat-4').onclick = (e)=>{
+  //   document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
+  // }
+
 }
 
 /**
  * Show error state
  */
- /*html*/ 
+/*html*/
 function showError(message) {
   updateDisplay(`
                 <div class="error">
@@ -105,13 +115,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       updateDisplay(showStats(data));
       updateButtonStates("stats");
     };
-    
+
 
     // Show initial view
     updateDisplay(showCards(data));
     updateButtonStates("cards");
 
-   
+
 
     console.log("Application ready!");
   } catch (error) {

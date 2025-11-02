@@ -1,51 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Views - Framework Approach</title>
     <link rel="stylesheet" href="stylenew.css">
 </head>
+
 <body>
-  <body>
-    <div class="container">
-        <header>
-            <h1>One Dataset, Four Presentations</h1>
-            <p><strong>Assignment:</strong> The same restaurant data, displayed in four different ways. Each presentation emphasizes different aspects of the information and serves different user goals.</p>
-        </header>
 
-        <nav class="view-selector">
-            <button class="view-button active" id="btn-cards" data-view="cards">Card View</button>
-            <button class="view-button" id="btn-table" data-view="table">Table View</button>
-            <button class="view-button" id="btn-categories" data-view="categories">Category View</button>
-            <button class="view-button" id="btn-stats" data-view="stats">Stats View</button>
-        </nav>
+    <body>
+        <div class="container">
+            <header>
+                <div class="logos">
+                    <img src="./assets/images/Weyland.svg" alt="weyland yutani" />
+                    <div class="bioweapons logo">
+                        <div class="logo-wrapper">
+                            <div class="logo-mark">
+                                <img src="./assets/images/bioweapons-icon.svg" alt="bioweapons division">
+                            </div>
+                            <div class="logo-name">
+                                Bio-Weapons
+                                <div class="logo-name-line-two">Division</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="title-content">
+                    <div class="date-place">
+                        Solar Cycle 2089, LV-426
+                    </div>
+                    <div class="content">
+                        <h1>One Asteroid,<br> More than four Xenomorphs!</h1>
+                        <p><strong>Mission:</strong> Collect samples from LV-426, below are the details of alien
+                            activities detected by our food inspection synthetics.
+                            <br><br><i>We can’t lie about your chances, but you have our sympathies!</i><br><br> Best of
+                            luck!
+                        </p>
+                    </div>
+                </div>
+            </header>
 
-        <main class="display-container">
-            <div id="data-display">
-                <div class="loading">Loading restaurant data...</div>
+            <div class="view-area">
+                <nav class="view-selector">
+                    <button class="view-button active" id="btn-cards" data-view="cards">
+                        <div class="view-icon-container">
+                            <svg class="view-icon" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect class="bg" x="8" y="15" width="48" height="34" fill="#9EC0BE" />
+                                <path class="fg"
+                                    d="M40 41.374L43.7002 38.5996L44.2998 39.4004L40 42.625L36 39.625L32 42.625L28 39.625L24 42.625L20 39.625L16.2998 42.4004L15.7002 41.5996L20 38.375L24 41.374L28 38.375L32 41.374L36 38.375L40 41.374Z"
+                                    fill="#151818" />
+                                <path class="fg" d="M26 29H15L20.5 20L26 29Z" fill="#151818" />
+                            </svg>
+                        </div>
+                        <span>
+                            Card
+                        </span>
+                    </button>
+                    <button class="view-button" id="btn-table" data-view="table">
+                        <div class="view-icon-container">
+                            <svg class="view-icon" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect class="bg" x="8" y="15" width="48" height="34" fill="#9EC0BE" />
+                                <path class="fg" d="M22 48H9V37H22V48Z" fill="#151818" />
+                                <path class="fg" d="M55 48H23V37H55V48Z" fill="#151818" />
+                                <path class="fg" d="M22 36H9V26H22V36Z" fill="#151818" />
+                                <path class="fg" d="M55 36H23V26H55V36Z" fill="#151818" />
+                                <path class="fg" d="M23 26H22V15H23V26Z" fill="#151818" />
+                            </svg>
+                        </div>
+                        <span>
+                            Table
+                        </span>
+                    </button>
+                    <button class="view-button" id="btn-categories" data-view="categories">
+                        <div class="view-icon-container">
+                            <svg class="view-icon" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path class="bg" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M56 15V49H8V15H56ZM40 16V48H55V16H40ZM9 48H24V16H9V48Z" fill="#9EC0BE" />
+                                <path class="fg" d="M24 48H9V16H24V48Z" fill="#151818" />
+                                <path class="fg" d="M55 48H40V16H55V48Z" fill="#151818" />
+                            </svg>
+                        </div>
+                        <span>
+                            Category
+                        </span>
+                    </button>
+                    <button class="view-button" id="btn-stats" data-view="stats">
+                        <div class="view-icon-container">
+                            <svg class="view-icon" width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path class="bg" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M56 15V49H8V15H56ZM9 48H24V33H9V48ZM25 48H39V33H25V48ZM40 48H55V33H40V48ZM40 32H55V16H40V32Z"
+                                    fill="#9EC0BE" />
+                                <path class="fg" d="M24 48H9V33H24V48Z" fill="#151818" />
+                                <path class="fg" d="M39 48H25V33H39V48Z" fill="#151818" />
+                                <path class="fg" d="M55 48H40V33H55V48Z" fill="#151818" />
+                                <path class="fg" d="M55 32H40V16H55V32Z" fill="#151818" />
+                            </svg>
+                        </div>
+                        <span>
+                            Stats
+                        </span>
+                    </button>
+                </nav>
+
+                <main class="display-container">
+                    <div id="data-display">
+                        <div class="loading">Loading restaurant data...</div>
+                    </div>
+                </main>
             </div>
-        </main>
+            <section class="asst-box">
+                <h3>Your Assignment:</h3>
+                <ol>
+                    <li><strong>Choose your API:</strong> Pick from PG County Open Data, NASA, Art Institute, etc.</li>
+                    <li><strong>Complete the four presentation functions:</strong> Card grid, data table, category
+                        groups, and statistics summary</li>
+                    <li><strong>Make each view useful:</strong> What information does each presentation emphasize?</li>
+                    <li><strong>Add your own styling:</strong> Make it visually appealing and easy to use</li>
+                    <li><strong>Write a reflection:</strong> How does presentation change the meaning of your data?</li>
+                </ol>
 
-        <section class="asst-box">
-            <h3>Your Assignment:</h3>
-            <ol>
-                <li><strong>Choose your API:</strong> Pick from PG County Open Data, NASA, Art Institute, etc.</li>
-                <li><strong>Complete the four presentation functions:</strong> Card grid, data table, category groups, and statistics summary</li>
-                <li><strong>Make each view useful:</strong> What information does each presentation emphasize?</li>
-                <li><strong>Add your own styling:</strong> Make it visually appealing and easy to use</li>
-                <li><strong>Write a reflection:</strong> How does presentation change the meaning of your data?</li>
-            </ol>
-            
-            <h3>Why Four Presentations?</h3>
-            <ul>
-                <li><strong>Card View:</strong> Best for browsing and comparing individual items</li>
-                <li><strong>Table View:</strong> Perfect for scanning specific data points and sorting</li>
-                <li><strong>Category View:</strong> Emphasizes groupings and relationships</li>
-                <li><strong>Stats View:</strong> Highlights patterns and aggregate insights</li>
-            </ul>
-        </section>
-    </div>
-    <script type="module" src="./script.js" defer></script>
-</body>
+                <h3>Why Four Presentations?</h3>
+                <ul>
+                    <li><strong>Card View:</strong> Best for browsing and comparing individual items</li>
+                    <li><strong>Table View:</strong> Perfect for scanning specific data points and sorting</li>
+                    <li><strong>Category View:</strong> Emphasizes groupings and relationships</li>
+                    <li><strong>Stats View:</strong> Highlights patterns and aggregate insights</li>
+                </ul>
+            </section>
+        </div>
+        <script type="module" src="./script.js" defer></script>
+    </body>
+
 </html>

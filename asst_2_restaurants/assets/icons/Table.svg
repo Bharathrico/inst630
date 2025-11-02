@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect class="bg" x="8" y="15" width="48" height="34" fill="#9EC0BE"/>
+<path class="fg" d="M22 48H9V37H22V48Z" fill="#151818"/>
+<path class="fg" d="M55 48H23V37H55V48Z" fill="#151818"/>
+<path class="fg" d="M22 36H9V26H22V36Z" fill="#151818"/>
+<path class="fg" d="M55 36H23V26H55V36Z" fill="#151818"/>
+<path class="fg" d="M23 26H22V15H23V26Z" fill="#151818"/>
+</svg>
