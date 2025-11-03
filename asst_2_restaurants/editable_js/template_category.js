@@ -36,7 +36,6 @@ function showCategories(data) {
                 <button id='cat-1' data-category = '${categories[0][0]}' >${categories[0][0]}</button>
                 <button id='cat-2' data-category = '${categories[1][0]}' >${categories[1][0]}</button>
                 <button id='cat-3' data-category = '${categories[2][0]}' >${categories[2][0]}</button>
-                <button id='cat-4' data-category = '${categories[3][0]}' >${categories[3][0]}</button>
                   <table id="category-table" class="category-table">
                         <thead>
                             <tr>

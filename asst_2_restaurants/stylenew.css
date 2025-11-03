@@ -274,6 +274,7 @@ h1 {
   padding: 1rem;
   width: 100%;
   background: var(--primary-background);
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .loading {
@@ -507,6 +508,10 @@ h1 {
   object-fit: contain;
   cursor: pointer;
   font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .category-button:hover {
@@ -619,10 +624,13 @@ h1 {
       }
     }
   }
+  .category-icon {
+    width: 10vw;
+    height: 10vw;
+  }
   .category-button {
     span {
-      visibility: hidden;
-      display: none;
+      font-size: 0.8rem;
     }
   }
 }
@@ -646,9 +654,8 @@ h1 {
 }
 
 @media (width<600px) {
-
   .container {
-  width: 80%;
+    width: 80%;
   }
 
   .city-breakdown {
@@ -722,6 +729,24 @@ h1 {
       .view-icon {
         max-width: 10vmin;
       }
+    }
+  }
+
+  .categories-container {
+    padding: 0.2rem;
+  }
+
+  .category-icon {
+    width: 15vw;
+    height: 15vw;
+  }
+  .category-button {
+    object-fit: contain;
+    width: 100%;
+    span {
+      font-size: 0.7rem;
+      /* visibility: hidden;
+      display: none; */
     }
   }
 }
