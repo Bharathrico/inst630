@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Set up event listeners - note the arrow function to pass the button
     document.querySelector('#load-data-button').addEventListener('click', async (event)=> {
         await clickToLoad(event.target); // Pass the button that was clicked
-        testMyWork() 
     });
     document.querySelector('#chart-button').addEventListener('click', createMyChart);
     document.querySelector('#map-button').addEventListener('click', createMyMap);
@@ -239,8 +238,8 @@ function animateMyCards() {
                 opacity:1,
                 scale: 1,
                 y: 0,
-                stagger: '0.1',
-                ease: CustomEase.create("custom", "M0,0 C0.501,0 0.505,0.413 0.506,0.499 0.507,0.606 0.502,1.004 1,1 "),
+                stagger: '0.08',
+                ease: CustomEase.create("custom", "M0,0 C0.714,0.096 0.386,0.791 1,1 "),
                 delay: '0.1'
                 // stagger: /* TODO: Delay between each card? 0.1 seconds? */,
                 // ease: /* TODO: What kind of easing? "bounce.out"? */
