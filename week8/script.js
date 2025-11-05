@@ -19,13 +19,14 @@ let myChart = null;
 let myMap = null;
 
 // Wait for page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async () => {
     console.log('Tutorial 8: Student work file ready!');
     
     // Set up your event listeners
     // Set up event listeners - note the arrow function to pass the button
-    document.querySelector('#load-data-button').addEventListener('click', function(event) {
-        clickToLoad(event.target); // Pass the button that was clicked
+    document.querySelector('#load-data-button').addEventListener('click', async (event)=> {
+        await clickToLoad(event.target); // Pass the button that was clicked
+        testMyWork() 
     });
     document.querySelector('#chart-button').addEventListener('click', createMyChart);
     document.querySelector('#map-button').addEventListener('click', createMyMap);
@@ -51,21 +52,30 @@ function createMyChart() {
     // Step 2: Process the restaurant data for charting
     // You need to count how many restaurants of each cuisine type there are
     const cuisineCounts = {};
-    restaurants.forEach(function(restaurant) {
+    restaurants.forEach((restaurant)=>{
         // TODO: Count restaurants by cuisine type
         // Hint: restaurant.cuisine is the field you want
+        if(restaurant.cuisine)
+        {
+            console.log("in")
+            cuisineCounts[restaurant.cuisine]=(cuisineCounts[restaurant.cuisine] || 0) + 1;
+        }
         // Hint: cuisineCounts[cuisine] = (cuisineCounts[cuisine] || 0) + 1;
     });
     
     // Step 3: Transform counts into Chart.js format using array methods
     // const chartLabels = /* TODO: Get the cuisine types (keys) */;
     // const chartData = /* TODO: Get the counts (values) */;
-    
+    let cuisineArray = Object.entries(cuisineCounts)
+    const chartLabels = cuisineArray.map((cuisine)=>{return cuisine[0]})
+    const chartData = cuisineArray.map((cuisine)=>{return cuisine[1]})
+
+
     console.log('Chart data prepared:', { labels: chartLabels, data: chartData });
     
     try {
         // Step 4: Get canvas and clear existing chart (provided)
-        const canvas = document.querySelector('#restaurant-chart');
+        const canvas = document.querySelector('#rating-chart');
         const ctx = canvas.getContext('2d');
         
         if (myChart) {
@@ -82,7 +92,7 @@ function createMyChart() {
                 labels: chartLabels,
                 datasets: [{
                     /* TODO: adjust this name */
-                    label: 'name-of-series',
+                    label:"Cuisine counts",
                     data: chartData,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.6)',
@@ -90,7 +100,9 @@ function createMyChart() {
                         'rgba(255, 205, 86, 0.6)',
                         'rgba(75, 192, 192, 0.6)',
                         'rgba(153, 102, 255, 0.6)',
-                        'rgba(255, 159, 64, 0.6)'
+                        'rgba(255, 159, 64, 0.6)',
+                        'rgba(227, 102, 255, 0.6)',
+                        'rgba(67, 255, 64, 0.6)'
                     ],
                     borderWidth: 2
                 }]
@@ -100,15 +112,22 @@ function createMyChart() {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'title your chart please'
+                        text: 'Restaurant count by cuisine'
                     }
                 },
                 scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Cuisines'
+                        }
+                    },
                     y: {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'a real y axis has a label'
+                            text: 'Number of Restaurants'
                         }
                     }
                 }
@@ -162,6 +181,13 @@ function createMyMap() {
             /* TODO: Build HTML string using restaurant.name, restaurant.cuisine, restaurant.rating */;
             // const popupContent = ...;
             
+            const popupContent = `<div>
+                                    <b>${restaurant.name}</b>
+                                    <br>
+                                    <i>${restaurant.cuisine}</i>
+                                    <div>${restaurant.rating} ⭐</div>
+                                  </div>`
+
             // TODO: Bind the popup to the marker and add to map
             marker.bindPopup(popupContent).addTo(myMap);
         });
@@ -200,12 +226,22 @@ function animateMyCards() {
         gsap.fromTo('.restaurant-card', 
             // FROM state (starting point)
             {
+                opacity:0,
+                scale: 0.7,
+                y: -10,
                 /* TODO: Starting properties - opacity, scale, y position? */
             },
             // TO state (ending point)  
             {
+                
                 /* TODO: Ending properties - make them fully visible and normal size */
-                duration: '0.2'
+                duration: '0.2',
+                opacity:1,
+                scale: 1,
+                y: 0,
+                stagger: '0.1',
+                ease: CustomEase.create("custom", "M0,0 C0.501,0 0.505,0.413 0.506,0.499 0.507,0.606 0.502,1.004 1,1 "),
+                delay: '0.1'
                 // stagger: /* TODO: Delay between each card? 0.1 seconds? */,
                 // ease: /* TODO: What kind of easing? "bounce.out"? */
             }
