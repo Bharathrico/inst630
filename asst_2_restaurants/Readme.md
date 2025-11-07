@@ -1,4 +1,4 @@
-#Project_2
+# Project 2
 
 For this project, initially, I just took the restaurant data set and created an interface.
 
