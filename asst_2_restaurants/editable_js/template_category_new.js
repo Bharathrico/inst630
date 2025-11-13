@@ -6,6 +6,7 @@
 let categoryObject = {}
 
 function showCategories(data) {
+
   // TODO: Students implement this function
   // Requirements:
   // - Group data by a meaningful category (cuisine, neighborhood, price, etc.)
@@ -91,13 +92,15 @@ function showCategories(data) {
 export function categoryView(category) {
   let categoryView = ``
   categoryObject[category].forEach((restaurant) => {
-    categoryView += '<tr>'
+    categoryView += '<tr class="category-row">'
     categoryView += `<td class='table-restaurant-name'>${restaurant.name}</td>`
     categoryView += `<td>${restaurant.city}</td>`
     categoryView += `</tr>`
   })
   return categoryView;
 }
+
+
 
 
 // Helper: chestburster check
@@ -163,6 +166,54 @@ function getXenoCheck(restaurant) {
 function getComplianceIndicator(value) {
     if (!value || value === '------') return 'N/A';
     return value === 'In Compliance' ? '✓' : '✗';
+}
+
+export function categoryEntry()
+{
+  //checking if gsap is loaded
+  if(typeof gsap == undefined)
+  {
+    alert('Gsap not loaded');
+    return
+  }
+  else
+  {
+    console.log("Gsap is loaded");
+  }
+
+  gsap.fromTo(".table-container", { opacity: 0 }, { opacity: 1, duration: 0.5 });
+}
+
+export function categoryExit()
+{
+  //checking if gsap is loaded
+  if(typeof gsap == undefined)
+  {
+    alert('Gsap not loaded');
+    return
+  }
+  else
+  {
+    console.log("Gsap is loaded");
+  }
+
+  gsap.to(".table-container",{ opacity: 0, duration: 0.5 });
+}
+
+export function rowAnimation()
+{
+  //checking if gsap is loaded
+  if(typeof gsap == undefined)
+  {
+    alert('Gsap not loaded');
+    return
+  }
+  else
+  {
+    console.log("Gsap is loaded");
+  }
+
+  gsap.fromTo(".category-row", { opacity: 0 }, { opacity: 1, stagger: 0.05, duration:0.1 });
 }
 
 export default showCategories;

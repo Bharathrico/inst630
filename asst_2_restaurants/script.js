@@ -1,5 +1,5 @@
 import showCards from './editable_js/template_cards.js';
-import showCategories, { categoryView } from './editable_js/template_category_new.js';
+import showCategories, { categoryView,categoryEntry,categoryExit,rowAnimation } from './editable_js/template_category_new.js';
 import showStats from './editable_js/template_stats.js';
 import showTable from './editable_js/template_table.js';
 
@@ -46,16 +46,25 @@ function updateCategoryButtonStates(activeView) {
 function categoryListeners() {
   document.querySelector('#category-table tbody').innerHTML = categoryView(document.querySelector('#cat-1').dataset.category)
   document.querySelector('#cat-1').onclick = (e) => {
+    categoryExit()
     document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     updateCategoryButtonStates('1')
+    categoryEntry()
+    rowAnimation()
   }
   document.querySelector('#cat-2').onclick = (e) => {
+    categoryExit()
     document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     updateCategoryButtonStates('2')
+    categoryEntry()
+    rowAnimation()
   }
   document.querySelector('#cat-3').onclick = (e) => {
+    categoryExit()
     document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     updateCategoryButtonStates('3')
+    categoryEntry()
+    rowAnimation()
   }
   // document.querySelector('#cat-4').onclick = (e)=>{
   //   document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 
@@ -108,6 +117,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("btn-categories").onclick = async () => {
       await updateDisplay(showCategories(data));
       await categoryListeners()
+      categoryEntry()
       updateButtonStates("categories");
     };
 
