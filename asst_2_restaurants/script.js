@@ -46,25 +46,31 @@ function updateCategoryButtonStates(activeView) {
 function categoryListeners() {
   document.querySelector('#category-table tbody').innerHTML = categoryView(document.querySelector('#cat-1').dataset.category)
   document.querySelector('#cat-1').onclick = (e) => {
-    categoryExit()
-    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     updateCategoryButtonStates('1')
+    categoryExit()
+    //setting a delay to trigger the exit animation
+    setTimeout(()=>{   
+    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     categoryEntry()
-    rowAnimation()
+    rowAnimation()},150)
   }
   document.querySelector('#cat-2').onclick = (e) => {
-    categoryExit()
-    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     updateCategoryButtonStates('2')
+    categoryExit()
+    //setting a delay to trigger the exit animation
+    setTimeout(()=>{ 
+    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     categoryEntry()
-    rowAnimation()
+    rowAnimation()},150)
   }
   document.querySelector('#cat-3').onclick = (e) => {
-    categoryExit()
-    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     updateCategoryButtonStates('3')
+    categoryExit()
+    //setting a delay to trigger the exit animation
+    setTimeout(()=>{
+    document.querySelector('#category-table tbody').innerHTML = categoryView(e.target.dataset.category)
     categoryEntry()
-    rowAnimation()
+    rowAnimation()},150)
   }
   // document.querySelector('#cat-4').onclick = (e)=>{
   //   document.querySelector('#category-table tbody').innerHTML =categoryView(e.target.dataset.category) 

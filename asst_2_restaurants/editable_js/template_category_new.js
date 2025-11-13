@@ -168,6 +168,7 @@ function getComplianceIndicator(value) {
     return value === 'In Compliance' ? '✓' : '✗';
 }
 
+//Triggers an entry animation for the table container
 export function categoryEntry()
 {
   //checking if gsap is loaded
@@ -181,9 +182,10 @@ export function categoryEntry()
     console.log("Gsap is loaded");
   }
 
-  gsap.fromTo(".table-container", { opacity: 0 }, { opacity: 1, duration: 0.5 });
+  gsap.fromTo(".table-container", { opacity: 0 }, { opacity: 1, duration: 0.5});
 }
 
+//Triggers an exit animation for the table container
 export function categoryExit()
 {
   //checking if gsap is loaded
@@ -194,12 +196,13 @@ export function categoryExit()
   }
   else
   {
-    console.log("Gsap is loaded");
+    console.log(" exit Gsap is loaded");
   }
 
-  gsap.to(".table-container",{ opacity: 0, duration: 0.5 });
+  gsap.to(".table-container",{ opacity: 0, duration: 0.15 });
 }
 
+//Triggers an entry animation for each row entry
 export function rowAnimation()
 {
   //checking if gsap is loaded
